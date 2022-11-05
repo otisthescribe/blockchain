@@ -14,6 +14,10 @@ contract Announcement {
 
   Ann[] public anns;
 
+  function list() public view returns(Ann[] memory){
+    return anns;
+  }
+
   function add(string calldata name, uint price) public {
     anns.push(
       Ann(name, price, payable(msg.sender), false, payable(0), false)
@@ -45,5 +49,9 @@ contract Announcement {
     require(success, "Failed to send money");
 
     ann.refunded = true;
+  }
+
+  function AnnsLength() public view returns(uint256) {
+    return anns.length;
   }
 }
