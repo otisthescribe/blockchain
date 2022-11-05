@@ -1,43 +1,45 @@
 import React, { Component } from 'react';
-import { AddAnnouncement, AnnouncementList, CurrentAccount } from "./Components.js";
+import { DrizzleContext } from '@drizzle/react-plugin';
+import { Drizzle } from '@drizzle/store'
+import { LoadingContainer, AccountData, ContractData, ContractForm } from '@drizzle/react-components';
+
+import Announcement from "./contracts/Announcement.json";
+import {Components} from "./Components.js";
 import './App.css';
 
-
-class App extends Component {
-  state = { loading: true, drizzleState: null };
-  componentDidMount() {
-    const { drizzle } = this.props;
-    this.unsubscribe = drizzle.store.subscribe(() => {
-      const drizzleState = drizzle.store.getState();
-      if (drizzleState.drizzleStatus.initialized) {
-        this.setState({ loading: false, drizzleState });
-    }
-  });
-  }
-
-  compomentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  render() {
-    if (this.state.loading) {
-      return "Loading Drizzle...";
-    }
-    else {
-      return (
-          <div className="App">
-            <AddAnnouncement>
-              drizzle={this.props.drizzle}
-              drizzleState={this.state.drizzleState}
-            </AddAnnouncement>
-            <AnnouncementList
-              drizzle={this.props.drizzle}
-              drizzleState={this.state.drizzleState}
-            />
-          </div>
-        );
+const drizzleOptions = { 
+  contracts: [
+    Announcement
+  ],
+  web3: {
+    fallback: {
+      type: 'ws',
+      url: 'ws://localhost:7545'
     }
   }
-  
+};
+
+const drizzle = new Drizzle(drizzleOptions);
+
+
+const App = () => {
+  return (
+    <DrizzleContext.Provider drizzle={drizzle}>
+      <DrizzleContext.Consumer>
+        {drizzleContext => {
+          const {drizzle, drizzleState, initialized} = drizzleContext;
+
+          if(!initialized) {
+            return "Loading..."
+          }
+
+          return (
+            <Components drizzle={drizzle} drizzleState={drizzleState} />
+            )
+          }}
+      </DrizzleContext.Consumer>
+    </DrizzleContext.Provider>
+  );
 }
+
 export default App;

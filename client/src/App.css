@@ -28,7 +28,33 @@
   height: 40px;
   background-color: #A44A3F;
 }
+
 .submit-button:active {
   background-color: #e77d6f;
   transform: translateY(4px);
 }
+
+.pay-button {
+  border-radius: 5px;
+  border-width: 0px;
+  width: 120px;
+  height: 40px;
+  background-color: #A44A3F;
+}
+
+.pay-button:active {
+  background-color: #e77d6f;
+  transform: translateY(4px);
+}
+
+.buy-item {
+  display: inline-block;
+  margin-left: 40px;
+  margin-bottom: 40px;
+}
+
+.add-announcement {
+  display: inline-block;
+}
+
+
