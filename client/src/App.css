@@ -2,10 +2,6 @@
   text-align: left;
 }
 
-.item-sold {
-  color: red;
-}
-
 .input-description {
   border-radius: 5px;
   border-width: 1px;
@@ -48,13 +44,21 @@
 }
 
 .buy-item {
-  display: inline-block;
-  margin-left: 40px;
   margin-bottom: 40px;
+  margin-top: 40px;
 }
 
-.add-announcement {
+.contract-methods {
+  vertical-align: top;
   display: inline-block;
+  width: 30%;
+  height: 100vh;
 }
 
+.list-of-items {
+  display: inline-block;
+  width: 60%;
+  height: 100vh;
+  vertical-align: top;
+}
 
