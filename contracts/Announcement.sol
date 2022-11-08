@@ -50,8 +50,4 @@ contract Announcement {
 
     ann.refunded = true;
   }
-
-  function AnnsLength() public view returns(uint256) {
-    return anns.length;
-  }
 }
