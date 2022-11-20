@@ -40,22 +40,6 @@ contract Apartment {
         contract_insurance.register_client(_client);
     }
 
-    function register_water(address payable _client) private {
-        contract_water.register_client(_client);
-    }
-
-    function register_gas(address payable _client) private {
-        contract_gas.register_client(_client);
-    }
-
-    function register_electricity(address payable _client) private {
-        contract_electricity.register_client(_client);
-    }
-
-    function register_garbage(address payable _client) private {
-        contract_garbage.register_client(_client);
-    }
-
 
     function buy_apartment(uint _index) public payable {
         Apartments storage apart = apartments[_index];
@@ -68,10 +52,6 @@ contract Apartment {
         apart.buyer = payable(msg.sender);
 
         register_insurrance(apart.buyer);
-        register_electricity(apart.buyer);
-        register_garbage(apart.buyer);
-        register_gas(apart.buyer);
-        register_water(apart.buyer);
 
     }
 
