@@ -36,24 +36,24 @@ contract Apartment {
         apartments.push(Apartments(location, price, false, payable(msg.sender), payable(0)));
     }
 
-    function register_insurrance(address payable _client) private {
-        contract_insurance.register_client(_client);
+    function register_insurrance(address payable _client, string memory _location) private {
+        contract_insurance.register_client(_client, _location);
     }
 
-    function register_water(address payable _client) private {
-        contract_water.register_client(_client);
+    function register_water(address payable _client, string memory _location) private {
+        contract_water.register_client(_client, _location);
     }
 
-    function register_gas(address payable _client) private {
-        contract_gas.register_client(_client);
+    function register_gas(address payable _client, string memory _location) private {
+        contract_gas.register_client(_client, _location);
     }
 
-    function register_electricity(address payable _client) private {
-        contract_electricity.register_client(_client);
+    function register_electricity(address payable _client, string memory _location) private {
+        contract_electricity.register_client(_client, _location);
     }
 
-    function register_garbage(address payable _client) private {
-        contract_garbage.register_client(_client);
+    function register_garbage(address payable _client, string memory _location) private {
+        contract_garbage.register_client(_client, _location);
     }
 
 
@@ -67,11 +67,11 @@ contract Apartment {
         apart.sold = true;
         apart.buyer = payable(msg.sender);
 
-        register_insurrance(apart.buyer);
-        register_electricity(apart.buyer);
-        register_garbage(apart.buyer);
-        register_gas(apart.buyer);
-        register_water(apart.buyer);
+        register_insurrance(apart.buyer, apart.location);
+        register_electricity(apart.buyer, apart.location);
+        register_garbage(apart.buyer, apart.location);
+        register_gas(apart.buyer, apart.location);
+        register_water(apart.buyer, apart.location);
 
     }
 
@@ -81,12 +81,13 @@ contract Electricity {
 
     struct Registrations {
         address payable client;
+        string location;
     }
 
     Registrations[] public clients;
 
-    function register_client (address payable _client) public {
-        clients.push(Registrations(_client));
+    function register_client (address payable _client, string memory _location) public {
+        clients.push(Registrations(_client, _location));
     }
 
 }
@@ -95,25 +96,28 @@ contract GarbageDisposal {
 
     struct Registrations {
         address payable client;
+        string location;
     }
 
     Registrations[] public clients;
 
-    function register_client (address payable _client) public {
-        clients.push(Registrations(_client));
+    function register_client (address payable _client, string memory _location) public {
+        clients.push(Registrations(_client, _location));
     }
+
 }
 
 contract Gas {
 
     struct Registrations {
         address payable client;
+        string location;
     }
 
     Registrations[] public clients;
 
-    function register_client (address payable _client) public {
-        clients.push(Registrations(_client));
+    function register_client (address payable _client, string memory _location) public {
+        clients.push(Registrations(_client, _location));
     }
 
 }
@@ -122,12 +126,13 @@ contract Insurrance {
 
     struct Registrations {
         address payable client;
+        string location;
     }
 
     Registrations[] public clients;
 
-    function register_client (address payable _client) public {
-        clients.push(Registrations(_client));
+    function register_client (address payable _client, string memory _location) public {
+        clients.push(Registrations(_client, _location));
     }
 
 }
@@ -136,12 +141,13 @@ contract WaterConnection {
 
     struct Registrations {
         address payable client;
+        string location;
     }
 
     Registrations[] public clients;
 
-    function register_client (address payable _client) public {
-        clients.push(Registrations(_client));
+    function register_client (address payable _client, string memory _location) public {
+        clients.push(Registrations(_client, _location));
     }
 
 }
