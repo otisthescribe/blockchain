@@ -41,8 +41,6 @@ class Orders extends React.Component {
 
     const { drizzle, drizzleState } = this.props;
     var contract = drizzle.contracts.Apartment;
-    
-    console.log('Trying to buy', this.items[selected_item], 'for', this.items[selected_item].price);
 
     const stackId = contract.methods.buy_apartment.cacheSend(
       selected_item,
@@ -102,8 +100,6 @@ class Orders extends React.Component {
 
     for (let i = 0; i < this.items.length; i++) {
       let d = this.items[i]
-      
-      console.log(this.items[i])
       
       if (d.sold == true) {
         soldItems.push(d);
