@@ -58,19 +58,19 @@ class ApartmentsSold extends ApartmentsList {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell>Location</TableCell>
-              <TableCell>Price [ETH]</TableCell>
-              <TableCell>Seller</TableCell>
-              <TableCell>Buyer</TableCell>
+              <TableCell align='center'>Location</TableCell>
+              <TableCell align='center'>Price [ETH]</TableCell>
+              <TableCell align='center'>Seller</TableCell>
+              <TableCell align='center'>Buyer</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {soldItems.map((item, index) => (
               <TableRow key={index}>
-                <TableCell>{item.location}</TableCell>
-                <TableCell>{this.getPriceInEth(item.price)}</TableCell>
-                <TableCell>{item.seller}</TableCell>
-                <TableCell>{item.buyer}</TableCell>
+                <TableCell align='center'>{item.location}</TableCell>
+                <TableCell align='center'>{this.getPriceInEth(item.price)}</TableCell>
+                <TableCell align='center'>{item.seller}</TableCell>
+                <TableCell align='center'>{item.buyer}</TableCell>
               </TableRow>
             ))}
           </TableBody>

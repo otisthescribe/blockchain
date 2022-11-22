@@ -58,9 +58,9 @@ class ApartmentsForSale extends ApartmentsList {
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
-              <TableCell>Location</TableCell>
-              <TableCell>Price [ETH]</TableCell>
-              <TableCell>Seller</TableCell>
+              <TableCell align='center'>Location</TableCell>
+              <TableCell align='center'>Price [ETH]</TableCell>
+              <TableCell align='center'>Seller</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -69,9 +69,9 @@ class ApartmentsForSale extends ApartmentsList {
                 <TableCell>
                   <Button onClick={() => this.buy(index)} variant="outlined">Buy</Button>
                 </TableCell>
-                <TableCell>{item.location}</TableCell>
-                <TableCell>{this.getPriceInEth(item.price)}</TableCell>
-                <TableCell>{item.seller}</TableCell>
+                <TableCell align='center'>{item.location}</TableCell>
+                <TableCell align='center'>{this.getPriceInEth(item.price)}</TableCell>
+                <TableCell align='center'>{item.seller}</TableCell>
               </TableRow>
             ))}
           </TableBody>
