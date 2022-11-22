@@ -209,7 +209,7 @@ function DashboardContent() {
                 <ListItemIcon>
                   <SellIcon />
                 </ListItemIcon>
-                <ListItemText primary="Sale Apartment" />
+                <ListItemText primary="Sell Apartment" />
               </ListItemButton>
             </React.Fragment>
           </List>
