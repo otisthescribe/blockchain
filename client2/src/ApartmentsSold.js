@@ -11,7 +11,7 @@ import { CircularProgress } from '@mui/material';
 
 const WEIS_IN_ETH = 1000000000000000000;
 
-class Orders extends React.Component {
+class ApartmentsSold extends React.Component {
   state = { dataKey: null };
   message = null;
   price = null;
@@ -21,7 +21,7 @@ class Orders extends React.Component {
   gas_price = null;
   current_balance = null;
   refund_item = null;
-
+  
   componentDidMount() {
     // Called once on component loading
     const { drizzle, drizzleState } = this.props;
@@ -95,45 +95,21 @@ class Orders extends React.Component {
     }
 
     this.items = ApartmentsList.value;
-    let listItems = Array();
-    let soldItems = Array();
+    let listItems = [];
+    let soldItems = [];
 
     for (let i = 0; i < this.items.length; i++) {
       let d = this.items[i]
       
-      if (d.sold == true) {
+      if (d.sold === true) {
         soldItems.push(d);
       } else {
         listItems.push(d)
       }
     }
-
+  
     return (
       <React.Fragment>
-        <Title>Apartments for sale</Title>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell>Location</TableCell>
-              <TableCell>Price [ETH]</TableCell>
-              <TableCell>Seller</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {listItems.map((item, index) => (
-              <TableRow key={index}>
-                <TableCell>
-                  <Button onClick={() => this.buy(index)} variant="outlined">Buy</Button>
-                </TableCell>
-                <TableCell>{item.location}</TableCell>
-                <TableCell>{this.getPriceInEth(item.price)}</TableCell>
-                <TableCell>{item.seller}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-
         <Title>Apartments sold</Title>
         <Table size="small">
           <TableHead>
@@ -160,4 +136,4 @@ class Orders extends React.Component {
   }
 }
 
-export {Orders};
+export {ApartmentsSold};

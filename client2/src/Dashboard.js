@@ -18,14 +18,18 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { CircularProgress } from '@mui/material';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import MoneyIcon from '@mui/icons-material/Money';
+import SellIcon from '@mui/icons-material/Sell';
 
-import { mainListItems, secondaryListItems } from './listItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import { Orders } from './Orders';
+import { ApartmentsForSale } from './ApartmentsForSale';
+import { ApartmentsSold } from './ApartmentsSold';
 
 
 
@@ -110,11 +114,27 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
+
+// class DashboardContentEEE extends React.Component {
+//   state = {
+//     renderView: 0
+//   };
+
+//   changePage(pageId) {
+//     this.setState({
+//       renderView: pageId
+//     });
+//   }
+//   render() {}
+// }
+
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  const [renderViewId, setRenderViewId] = React.useState(0);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -164,9 +184,34 @@ function DashboardContent() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            <React.Fragment>
+              <ListItemButton onClick={() => setRenderViewId(0)}>
+                <ListItemIcon>
+                  <ApartmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Buy Apartment" />
+              </ListItemButton>
+              <ListItemButton onClick={() => setRenderViewId(1)}>
+                <ListItemIcon>
+                  <MoneyIcon />
+                </ListItemIcon>
+                <ListItemText primary="Sold Apartments" />
+              </ListItemButton>
+            </React.Fragment>
+
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+
+            <React.Fragment>
+              <ListSubheader component="div" inset>
+                Sellers
+              </ListSubheader>
+              <ListItemButton>
+                <ListItemIcon>
+                  <SellIcon />
+                </ListItemIcon>
+                <ListItemText primary="Sale Apartment" />
+              </ListItemButton>
+            </React.Fragment>
           </List>
         </Drawer>
         <Box
@@ -208,47 +253,50 @@ function DashboardContent() {
                   )
                 }
 
-                return (
-                  <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                    <Grid container spacing={3}>
-                      {/* Apartments list */}
-                      <Grid item xs={12}>
-                        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                          <Orders drizzle={drizzle} drizzleState={drizzleState} />
-                        </Paper>
-                      </Grid>
-
-
-                      {/* Chart */}
-                      {/* <Grid item xs={12} md={8} lg={9}>
-                        <Paper
-                          sx={{
-                            p: 2,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            height: 240,
-                          }}
-                        >
-                          <Chart />
-                        </Paper>
-                      </Grid> */}
-                      {/* Recent Deposits */}
-                      {/* <Grid item xs={12} md={4} lg={3}>
-                        <Paper
-                          sx={{
-                            p: 2,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            height: 240,
-                          }}
-                        >
-                          <Deposits />
-                        </Paper>
-                      </Grid> */}
-                    </Grid>
-                    <Copyright sx={{ pt: 4 }} />
-                  </Container>
-                )
+                switch (renderViewId) {
+                  case 0:
+                    return (
+                      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                        <Grid container spacing={3}>
+                          {/* Apartments list */}
+                          <Grid item xs={12}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                              <ApartmentsForSale drizzle={drizzle} drizzleState={drizzleState} />
+                            </Paper>
+                          </Grid>
+                        </Grid>
+                        <Copyright sx={{ pt: 4 }} />
+                      </Container>
+                    )
+                  case 1:
+                    return (
+                      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                        <Grid container spacing={3}>
+                          {/* Apartments list */}
+                          <Grid item xs={12}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                              <ApartmentsSold drizzle={drizzle} drizzleState={drizzleState} />
+                            </Paper>
+                          </Grid>
+                        </Grid>
+                        <Copyright sx={{ pt: 4 }} />
+                      </Container>
+                    );
+                  default:
+                    return (
+                      <React.Fragment>
+                        <Table size="small">
+                          <TableBody>
+                            <TableRow>
+                              <TableCell align='center'>
+                                Page not found!
+                              </TableCell>
+                            </TableRow>
+                          </TableBody>
+                        </Table>
+                      </React.Fragment>
+                    )
+                }
               }}
             </DrizzleContext.Consumer>
           </DrizzleContext.Provider>
