@@ -9,6 +9,7 @@ import Title from './Title';
 import { CircularProgress } from '@mui/material';
 
 
+const WEIS_IN_ETH = 1000000000000000000;
 
 class Orders extends React.Component {
   state = { dataKey: null };
@@ -51,6 +52,18 @@ class Orders extends React.Component {
         // gas: this.gas_price
       }
     );
+  }
+
+  getPriceInEth(price) {
+    let ret = price / WEIS_IN_ETH;
+
+    ret = ret.toFixed(2);
+
+    if (ret < 0.01) {
+      ret = '< 0.01';
+    }
+
+    return ret;
   }
 
   render() {
@@ -118,7 +131,7 @@ class Orders extends React.Component {
                   <Button onClick={() => this.buy(index)} variant="outlined">Buy</Button>
                 </TableCell>
                 <TableCell>{item.location}</TableCell>
-                <TableCell>{item.price}</TableCell>
+                <TableCell>{this.getPriceInEth(item.price)}</TableCell>
                 <TableCell>{item.seller}</TableCell>
               </TableRow>
             ))}
@@ -139,7 +152,7 @@ class Orders extends React.Component {
             {soldItems.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>{item.location}</TableCell>
-                <TableCell>{item.price}</TableCell>
+                <TableCell>{this.getPriceInEth(item.price)}</TableCell>
                 <TableCell>{item.seller}</TableCell>
                 <TableCell>{item.buyer}</TableCell>
               </TableRow>
