@@ -36,6 +36,7 @@ import { ApartmentsSold } from './ApartmentsSold';
 import { DrizzleContext } from '@drizzle/react-plugin';
 import { Drizzle } from '@drizzle/store'
 import Apartment from './contracts/Apartment.json';
+import { SellApartment } from './SellApartment';
 
 const drizzleOptions = { 
   contracts: [
@@ -205,7 +206,7 @@ function DashboardContent() {
               <ListSubheader component="div" inset>
                 Sellers
               </ListSubheader>
-              <ListItemButton>
+              <ListItemButton onClick={() => setRenderViewId(2)}>
                 <ListItemIcon>
                   <SellIcon />
                 </ListItemIcon>
@@ -282,6 +283,20 @@ function DashboardContent() {
                         <Copyright sx={{ pt: 4 }} />
                       </Container>
                     );
+                  case 2:
+                    return (
+                      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                        <Grid container spacing={3}>
+                          {/* Apartments list */}
+                          <Grid item xs={12}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                              <SellApartment drizzle={drizzle} drizzleState={drizzleState} />
+                            </Paper>
+                          </Grid>
+                        </Grid>
+                        <Copyright sx={{ pt: 4 }} />
+                      </Container>
+                    )
                   default:
                     return (
                       <React.Fragment>
