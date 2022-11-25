@@ -42,16 +42,8 @@ class ApartmentsSold extends ApartmentsList {
     }
 
     this.items = ApartmentsList.value;
-    let soldItems = [];
+    let soldItems = this.getList(function (d) { return d.sold === true; });
 
-    for (let i = 0; i < this.items.length; i++) {
-      let d = this.items[i]
-      
-      if (d.sold === true) {
-        soldItems.push(d);
-      }
-    }
-  
     return (
       <React.Fragment>
         <Title>Apartments sold</Title>
@@ -65,12 +57,12 @@ class ApartmentsSold extends ApartmentsList {
             </TableRow>
           </TableHead>
           <TableBody>
-            {soldItems.map((item, index) => (
-              <TableRow key={index}>
-                <TableCell align='center'>{item.location}</TableCell>
-                <TableCell align='center'>{this.getPriceInEth(item.price)}</TableCell>
-                <TableCell align='center'>{item.seller}</TableCell>
-                <TableCell align='center'>{item.buyer}</TableCell>
+            {soldItems.map((entry) => (
+              <TableRow key={entry.index}>
+                <TableCell align='center'>{entry.apartment.location}</TableCell>
+                <TableCell align='center'>{this.getPriceInEth(entry.apartment.price)}</TableCell>
+                <TableCell align='center'>{entry.apartment.seller}</TableCell>
+                <TableCell align='center'>{entry.apartment.buyer}</TableCell>
               </TableRow>
             ))}
           </TableBody>
