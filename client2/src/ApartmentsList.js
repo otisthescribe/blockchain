@@ -29,6 +29,30 @@ class ApartmentsList extends React.Component {
     this.gas_price = 6721975;
   }
 
+  getList(filterFunc = null) {
+    let listItems = [];
+
+    for (let i = 0; i < this.items.length; i++) {
+      let d = this.items[i]
+      
+      if (filterFunc === null) {
+        listItems.push({
+          'index': i,
+          'apartment': d
+        });
+      } else {
+        if (filterFunc(d)) {
+          listItems.push({
+            'index': i,
+            'apartment': d
+          });
+        }
+      }
+    }
+
+    return listItems;
+  }
+
   buy(index) {
     let selected_item = index;
 

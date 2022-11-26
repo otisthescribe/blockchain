@@ -41,15 +41,7 @@ class ApartmentsForSale extends ApartmentsList {
     }
 
     this.items = ApartmentsList.value;
-    let listItems = [];
-
-    for (let i = 0; i < this.items.length; i++) {
-      let d = this.items[i]
-      
-      if (d.sold !== true) {
-        listItems.push(d)
-      }
-    }
+    let listItems = this.getList(function (d) { return d.sold !== true; });
 
     return (
       <React.Fragment>
@@ -64,14 +56,14 @@ class ApartmentsForSale extends ApartmentsList {
             </TableRow>
           </TableHead>
           <TableBody>
-            {listItems.map((item, index) => (
-              <TableRow key={index}>
+            {listItems.map((entry) => (
+              <TableRow key={entry.index}>
                 <TableCell>
-                  <Button onClick={() => this.buy(index)} variant="outlined">Buy</Button>
+                  <Button onClick={() => this.buy(entry.index)} variant="outlined">Buy</Button>
                 </TableCell>
-                <TableCell align='center'>{item.location}</TableCell>
-                <TableCell align='center'>{this.getPriceInEth(item.price)}</TableCell>
-                <TableCell align='center'>{item.seller}</TableCell>
+                <TableCell align='center'>{entry.apartment.location}</TableCell>
+                <TableCell align='center'>{this.getPriceInEth(entry.apartment.price)}</TableCell>
+                <TableCell align='center'>{entry.apartment.seller}</TableCell>
               </TableRow>
             ))}
           </TableBody>
