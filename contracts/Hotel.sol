@@ -11,6 +11,7 @@ contract Hotel {
 
     constructor() payable {
         hotel_owner         = payable(msg.sender);
+
         contract_food       = new Food(hotel_owner);
         contract_trips      = new Trips(hotel_owner);
         contract_parties    = new Parties(hotel_owner);
@@ -131,7 +132,8 @@ contract Food {
 
 }
 
-contract Trips {
+
+contract AirportTransport {
 
     address payable public admin;
     uint price = 0;
@@ -166,6 +168,7 @@ contract Trips {
     }
 
 }
+
 
 contract Parties {
 
@@ -203,7 +206,7 @@ contract Parties {
 
 }
 
-contract AirportTransport {
+contract Trips {
 
     address payable public admin;
     uint price = 0;

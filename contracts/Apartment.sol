@@ -90,6 +90,10 @@ contract Electricity {
         clients.push(Registrations(_client, _location));
     }
 
+    function list_clients() public view returns(Registrations[] memory){
+        return clients;
+    }
+
 }
 
 contract GarbageDisposal {
@@ -103,6 +107,10 @@ contract GarbageDisposal {
 
     function register_client (address payable _client, string memory _location) public {
         clients.push(Registrations(_client, _location));
+    }
+
+    function list_clients() public view returns(Registrations[] memory) {
+        return clients;
     }
 
 }
@@ -120,6 +128,10 @@ contract Gas {
         clients.push(Registrations(_client, _location));
     }
 
+    function list_clients() public view returns(Registrations[] memory) {
+        return clients;
+    }
+
 }
 
 contract Insurrance {
@@ -135,6 +147,10 @@ contract Insurrance {
         clients.push(Registrations(_client, _location));
     }
 
+    function list_clients() public view returns(Registrations[] memory) {
+        return clients;
+    }
+
 }
 
 contract WaterConnection {
@@ -148,6 +164,10 @@ contract WaterConnection {
 
     function register_client (address payable _client, string memory _location) public {
         clients.push(Registrations(_client, _location));
+    }
+
+    function list_clients() public view returns(Registrations[] memory) {
+        return clients;
     }
 
 }
