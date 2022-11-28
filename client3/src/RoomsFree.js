@@ -9,6 +9,8 @@ import Title from './Title';
 import { CircularProgress } from '@mui/material';
 import { TextField } from '@mui/material';
 
+import { Room } from './Room';
+
 
 const WEIS_IN_ETH = 1000000000000000000;
 
@@ -27,6 +29,8 @@ class RoomsFree extends React.Component {
   current_balance = null;
   refund_item = null;
 
+  drizzleState = null;
+
   setFrom = event => {
     this.setState({
       from: event.target.value
@@ -42,6 +46,7 @@ class RoomsFree extends React.Component {
   componentDidMount() {
     // Called once on component loading
     const { drizzle, drizzleState } = this.props;
+
     const contract = drizzle.contracts.Hotel;
     // Set the account to first from the MetaMask list
     // this.current_account = drizzleState.accounts[0];
@@ -160,15 +165,18 @@ class RoomsFree extends React.Component {
           </TableHead>
           <TableBody>
             {listItems.map((entry) => (
-              <TableRow key={entry.index}>
-                <TableCell>
-                  <Button onClick={() => this.buy(entry.index)} variant="outlined">Reserve</Button>
-                </TableCell>
-                <TableCell align='center'>{entry.room.room_number}</TableCell>
-                <TableCell align='center'>{entry.room.single_beds}</TableCell>
-                <TableCell align='center'>{entry.room.double_beds}</TableCell>
-                <TableCell align='center'>{this.getPriceInEth(entry.room.price_for_night)}</TableCell>
-              </TableRow>
+              <Room
+                key={entry.index}
+                
+                drizzle={drizzle}
+                drizzleState={drizzleState}
+                
+                index={entry.index}
+                room={entry.room}
+
+                from={this.state.from}
+                to={this.state.to}
+              ></Room>
             ))}
           </TableBody>
         </Table>
