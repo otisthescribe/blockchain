@@ -127,26 +127,28 @@ class RoomsFree extends React.Component {
     return (
       <React.Fragment>
         <Title>Rooms</Title>
-        <br/>
 
-        <TextField
-            style={{ width: "400px", margin: "5px" }}
-            type="date"
-            label="From"
-            variant="outlined"
-            onChange={this.setFrom}
-            value={this.timestampToDate(this.state.from)}
-          />
-        <TextField
-            style={{ width: "400px", margin: "5px" }}
-            type="date"
-            label="To"
-            variant="outlined"
-            onChange={this.setTo}
-            value={this.timestampToDate(this.state.to)}
-          />
-        <br/>
-
+        <Table size="small">
+          <TableBody>
+            <TextField
+              style={{ width: "400px", margin: "5px" }}
+              type="date"
+              label="From"
+              variant="outlined"
+              onChange={this.setFrom}
+              value={this.timestampToDate(this.state.from)}
+            />
+            <TextField
+                style={{ width: "400px", margin: "5px" }}
+                type="date"
+                label="To"
+                variant="outlined"
+                onChange={this.setTo}
+                value={this.timestampToDate(this.state.to)}
+              />
+          </TableBody>
+        </Table>
+        
         <Table size="small">
           <TableHead>
             <TableRow>
