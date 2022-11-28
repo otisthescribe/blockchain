@@ -17,8 +17,12 @@ const WEIS_IN_ETH = 1000000000000000000;
 class RoomsFree extends React.Component {
   state = {
     dataKey: null,
-    from: 0,
-    to: 1,
+    from: this.dateToTimestamp(new Date()),
+    to: this.dateToTimestamp(
+      (new Date()).setDate(
+        (new Date()).getDate() + 1
+      )
+    ),
   };
   message = null;
   price = null;
@@ -33,13 +37,13 @@ class RoomsFree extends React.Component {
 
   setFrom = event => {
     this.setState({
-      from: event.target.value
+      from: this.dateToTimestamp(event.target.value)
     });
   };
 
   setTo = event => {
     this.setState({
-      to: event.target.value
+      to: this.dateToTimestamp(event.target.value)
     });
   };
   
@@ -68,6 +72,14 @@ class RoomsFree extends React.Component {
     }
 
     return ret;
+  }
+
+  timestampToDate(timestamp) {
+    return (new Date(timestamp * 1000)).toISOString().split('T')[0];
+  }
+
+  dateToTimestamp(date) {
+    return Math.round(new Date(date).getTime()/1000);
   }
 
   render() {
@@ -119,19 +131,19 @@ class RoomsFree extends React.Component {
 
         <TextField
             style={{ width: "400px", margin: "5px" }}
-            type="number"
+            type="date"
             label="From"
             variant="outlined"
             onChange={this.setFrom}
-            value={this.state.from}
+            value={this.timestampToDate(this.state.from)}
           />
         <TextField
             style={{ width: "400px", margin: "5px" }}
-            type="number"
+            type="date"
             label="To"
             variant="outlined"
             onChange={this.setTo}
-            value={this.state.to}
+            value={this.timestampToDate(this.state.to)}
           />
         <br/>
 

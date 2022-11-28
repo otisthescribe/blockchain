@@ -56,12 +56,15 @@ class Room extends React.Component {
     const { drizzle, drizzleState } = this.props;
     var contract = drizzle.contracts.Hotel;
 
+    let days_total = (this.state.to - this.state.from) / 60 / 60 / 24;
+    let price = this.state.room.price_for_night * days_total;
+
     console.log(this.state.from,
       this.state.to,
       this.state.room.room_number,
       {
         from: this.current_account,
-        value: this.state.room.price_for_night,
+        value: price,
         gas: this.gas_price
       });
     contract.methods.reserve_room.cacheSend(
@@ -70,7 +73,7 @@ class Room extends React.Component {
       this.state.room.room_number,
       {
         from: this.current_account,
-        value: this.state.room.price,
+        value: price,
         gas: this.gas_price
       }
     );
