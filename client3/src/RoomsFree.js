@@ -58,24 +58,6 @@ class RoomsFree extends React.Component {
     this.gas_price = 6721975;
   }
 
-  buy(index) {
-    let selected_item = index;
-
-    const { drizzle, drizzleState } = this.props;
-    var contract = drizzle.contracts.Hotel;
-
-    const stackId = contract.methods.reserve_room.cacheSend(
-      this.state.from,
-      this.state.to,
-      this.items[selected_item].room_number,
-      {
-        from: this.current_account,
-        value: this.items[selected_item].price,
-        gas: this.gas_price
-      }
-    );
-  }
-
   getPriceInEth(price) {
     let ret = price / WEIS_IN_ETH;
 

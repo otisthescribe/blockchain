@@ -31,6 +31,9 @@ class Room extends React.Component {
       from, to,
       dataKey
     });
+
+    this.current_account = drizzleState.accounts[0];
+    this.gas_price = 6721975;
   }
 
   componentWillReceiveProps(nextProps){
@@ -47,6 +50,30 @@ class Room extends React.Component {
     }
 
     return ret;
+  }
+
+  buy() {
+    const { drizzle, drizzleState } = this.props;
+    var contract = drizzle.contracts.Hotel;
+
+    console.log(this.state.from,
+      this.state.to,
+      this.state.room.room_number,
+      {
+        from: this.current_account,
+        value: this.state.room.price_for_night,
+        gas: this.gas_price
+      });
+    contract.methods.reserve_room.cacheSend(
+      this.state.from,
+      this.state.to,
+      this.state.room.room_number,
+      {
+        from: this.current_account,
+        value: this.state.room.price,
+        gas: this.gas_price
+      }
+    );
   }
 
   render() {
@@ -99,7 +126,7 @@ class Room extends React.Component {
     return (
       <TableRow key={this.state.index}>
         <TableCell>
-          <Button onClick={() => this.buy(this.state.index)} variant={free ? 'outlined' : 'disabled'}>{ free ? 'Reserve' : 'Reserved' }</Button>
+          <Button onClick={() => this.buy()} variant={free ? 'outlined' : 'disabled'}>{ free ? 'Reserve' : 'Reserved' }</Button>
         </TableCell>
         <TableCell align='center'>{this.state.room?.room_number}</TableCell>
         <TableCell align='center'>{this.state.room?.single_beds}</TableCell>
