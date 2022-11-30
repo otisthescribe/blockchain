@@ -112,7 +112,7 @@ class RoomsFree extends React.Component {
       )
     }
 
-    this.items = RoomsList.value;
+    this.items = RoomsList.value ?? [];
     let listItems = [];
 
     for (let i = 0; i < this.items.length; i++) {
@@ -148,7 +148,7 @@ class RoomsFree extends React.Component {
               />
           </TableBody>
         </Table>
-        
+
         <Table size="small">
           <TableHead>
             <TableRow>

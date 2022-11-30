@@ -95,7 +95,7 @@ class Room extends React.Component {
       )
     }
 
-    let reservations = ReservationsList.value;
+    let reservations = ReservationsList.value ?? [];
     let free = true;
 
     for (let i = 0; i < reservations.length; ++i) {
