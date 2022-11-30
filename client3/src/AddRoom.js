@@ -15,7 +15,7 @@ class AddRoom extends React.Component {
       room_number: 0,
       single_beds: 0,
       double_beds: 0,
-      priceEth: 0
+      priceEth: 0.0
     };
 
     this.gas_price = 6721975;
@@ -48,7 +48,7 @@ class AddRoom extends React.Component {
   addRoom() {
     console.log(this.state);
 
-    let price = BigInt(this.state.priceEth) * BigInt(WEIS_IN_ETH);
+    let price = BigInt(this.state.priceEth * WEIS_IN_ETH);
 
     const { drizzle, drizzleState } = this.props;
     var contract = drizzle.contracts.Hotel;
@@ -62,7 +62,7 @@ class AddRoom extends React.Component {
         gas: this.gas_price
       }
     );
-    
+
     this.setState({
       room_number: '',
       single_beds: '',
