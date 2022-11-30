@@ -135,6 +135,7 @@ class Room extends React.Component {
         <TableCell align='center'>{this.state.room?.single_beds}</TableCell>
         <TableCell align='center'>{this.state.room?.double_beds}</TableCell>
         <TableCell align='center'>{this.getPriceInEth(this.state.room?.price_for_night)}</TableCell>
+        <TableCell align='center'>{this.getPriceInEth(this.state.room?.price_for_night * Math.round((this.state.to - this.state.from) / 24 / 60 / 60))}</TableCell>
       </TableRow>
     )
   }

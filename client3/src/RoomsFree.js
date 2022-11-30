@@ -156,24 +156,28 @@ class RoomsFree extends React.Component {
               <TableCell align='center'>Room number</TableCell>
               <TableCell align='center'>Single beds</TableCell>
               <TableCell align='center'>Double beds</TableCell>
+              <TableCell align='center'>Price per day [ETH]</TableCell>
               <TableCell align='center'>Price [ETH]</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {listItems.map((entry) => (
-              <Room
-                key={entry.index}
-                
-                drizzle={drizzle}
-                drizzleState={drizzleState}
-                
-                index={entry.index}
-                room={entry.room}
+            {listItems.map((entry) => (this.state.to > this.state.from) ? (
+                  <Room
+                    key={entry.index}
+                    
+                    drizzle={drizzle}
+                    drizzleState={drizzleState}
+                    
+                    index={entry.index}
+                    room={entry.room}
 
-                from={this.state.from}
-                to={this.state.to}
-              ></Room>
-            ))}
+                    from={this.state.from}
+                    to={this.state.to}
+                  ></Room>
+                ) : (
+                  <></>
+                )
+            )}
           </TableBody>
         </Table>
       </React.Fragment>
